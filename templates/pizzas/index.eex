@@ -1,6 +1,6 @@
 <h1>Fruits.index (/fruits)</h1>
 
-<%= if user do %>
+<%= if user do %> 
 	<form action="/users/logout" method="post">
 		<button type="submit">Log Out</button>
 	</form>

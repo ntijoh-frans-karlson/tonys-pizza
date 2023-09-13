@@ -1,0 +1,9 @@
+<ul>
+  <%= for pizza <- pizzas do %>
+    <li>
+    	<p> 
+            Id: <%=pizza.id%>, Name: <%=pizza.name%>, Options: <%=pizza.options%>, Extra toppings:<%=pizza.extra_toppings%>, Done: <%=pizza.done%>
+		</p>
+	</li>
+  <% end %>
+</ul>

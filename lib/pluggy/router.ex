@@ -5,7 +5,7 @@ defmodule Pluggy.Router do
 
   alias Pluggy.FruitController
   alias Pluggy.UserController
-
+  alias Pluggy.PizzaController
 
 
   plug(Plug.Static, at: "/", from: :pluggy)
@@ -30,6 +30,8 @@ defmodule Pluggy.Router do
   get("/fruits/new", do: FruitController.new(conn))
   get("/fruits/:id", do: FruitController.show(conn, id))
   get("/fruits/:id/edit", do: FruitController.edit(conn, id))
+
+  get("/pizzas", do: PizzaController.index(conn))
 
   post("/fruits", do: FruitController.create(conn, conn.body_params))
 
