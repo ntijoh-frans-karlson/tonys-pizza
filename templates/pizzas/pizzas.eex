@@ -27,7 +27,7 @@
         <td> <%= pizza.options |> String.replace(" ", ", ") |> String.replace("_", " ")%> </td>
         <td> <%= pizza.extra_toppings%> </td>
         <td> 
-          <form action="/pizza/toggle_done/<%=pizza.id%>" method="POST">
+          <form action="/pizzas/toggle_done/<%=pizza.id%>" method="POST">
             <%= if pizza.done == 1 do %>
               <input class = "pizza_submits" id = "pizza_check" type="submit"> 
             <% else %>
@@ -36,7 +36,7 @@
           </form>
         </td>
         <td> 
-          <form action="/pizza/delete/<%=pizza.id%>" method="POST">
+          <form action="/pizzas/delete/<%=pizza.id%>" method="POST">
             <input class = "pizza_submits" id = "pizza_trashcan" type="submit">
           </form>
         </td>
