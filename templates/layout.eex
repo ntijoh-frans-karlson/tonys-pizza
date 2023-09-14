@@ -3,8 +3,10 @@
 <head>
 	<title>Welcome to Pluggy</title>
 	<link rel="stylesheet" type="text/css" href="/pluggy.css">
+	<meta charset="UTF-8">
 </head>
 <body>
 	<%= template %>
 </body>
 </html>
+
