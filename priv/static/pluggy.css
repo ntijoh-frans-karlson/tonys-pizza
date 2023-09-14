@@ -1,3 +1,17 @@
 body {
 	background-color: peachpuff;
 }
+
+.header {
+	width: 70%;
+}
+
+.pizza_img {
+	height: 100px;
+}
+
+.content {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
