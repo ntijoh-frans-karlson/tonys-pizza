@@ -63,6 +63,31 @@
 	border: 1px solid black;
 }
 
-#delete_button{
-	
+.pizza_submits{
+	width: 100%;
+	text-indent: -300px;
+	border: none;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 23px;
+	height: 23px;
 }
+
+.pizza_submits:hover{
+	cursor: pointer;
+}
+
+#pizza_cross{
+	background-image: url("img/cross.svg");	
+}
+
+#pizza_check{
+	background-image: url("img/checkmark.svg")
+}
+
+#pizza_trashcan{
+	background-image: url("img/trash-can.svg")
+}
+
+
