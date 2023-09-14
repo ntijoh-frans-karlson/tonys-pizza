@@ -29,15 +29,15 @@
         <td> 
           <form action="/pizza/toggle_done/<%=pizza.id%>" method="POST">
             <%= if pizza.done == 1 do %>
-              <input type="image" src="img/checkmark.svg"> 
+              <input class = "pizza_submits" id = "pizza_check" type="submit"> 
             <% else %>
-              <input type="image" src="img/cross.svg" alt="cross_icon"> 
+              <input class = "pizza_submits" id = "pizza_cross" type="submit"> 
             <% end %>
           </form>
         </td>
         <td> 
           <form action="/pizza/delete/<%=pizza.id%>" method="POST">
-            <input type="image" src="img/trash-can.svg" alt="trash_icon">
+            <input class = "pizza_submits" id = "pizza_trashcan" type="submit">
           </form>
         </td>
       </tr>
