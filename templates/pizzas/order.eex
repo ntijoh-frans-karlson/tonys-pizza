@@ -1,0 +1,54 @@
+<div class="main_body">
+    <div class="content">
+        <img src="img/tonys-pizza-logo.svg" alt="" class="header">
+        <div class="pizza_menu">
+            <div class="pizza_card">
+                <img src="img/margherita.svg" alt="margherita" class="pizza_img">
+                <div class="pizza_text">
+                    <p class="pizza_name">Margherita</p>
+                    <p class="ingridient">Tomatsås</p>
+                    <p class="ingridient">Mozzarella</p>
+                    <p class="ingridient">Basilika</p>
+                    <div class="pizza_buttons"><button class="edit">Anpassa<button class="buy">Köp</button></button></div>
+                </div>
+            </div>
+
+            <div class="pizza_card">
+                <img src="img/capricciosa.svg" alt="capricciosa" class="pizza_img">
+                <div class="pizza_text">
+                    <p class="pizza_name">Capricciosa</p>
+                    <p class="ingridient">Tomatsås</p>
+                    <p class="ingridient">Mozzarella</p>
+                    <p class="ingridient">Skinka</p>
+                    <p class="ingridient">Svamp</p>
+                    <p class="ingridient">Kronärtskocka</p>
+                    <div class="pizza_buttons"><button class="edit">Anpassa<button class="buy">Köp</button></button></div>
+                </div>
+            </div>
+            <div class="pizza_card">
+                <img src="img/marinara.svg" alt="marinara" class="pizza_img">
+                <div class="pizza_text">
+                    <p class="pizza_name">Marinara</p>
+                    <p class="ingridient">Tomatsås</p>
+                    <div class="pizza_buttons"><button class="edit">Anpassa<button class="buy">Köp</button></button></div>
+                </div>
+            </div>
+            <div class="pizza_card">
+                <img src="img/quattro-formaggi.svg" alt="quattro formaggi" class="pizza_img">
+                <div class="pizza_text">
+                    <p class="pizza_name">Quattro formaggi</p>
+                    <p class="ingridient">Tomatsås</p>
+                    <p class="ingridient">Mozzarella</p>
+                    <p class="ingridient">Parmesan</p>
+                    <p class="ingridient">Peccorino</p>
+                    <p class="ingridient">Gorgonsola</p>
+                    <div class="pizza_buttons"><button class="edit">Anpassa<button class="buy">Köp</button></button></div>
+                </div>
+            </div>
+        </div>
+    </div> 
+    <div class="cart">
+        <img src="" alt="" class="cart_icon">
+        <div class="cart_contents"></div>
+    </div>
+</div>
