@@ -9,6 +9,10 @@ defmodule Pluggy.PizzaController do
     send_resp(conn, 200, render("pizzas/pizzas", pizzas: Pizza.all()))
   end
 
+  def order(conn) do
+    send_resp(conn, 200, render("pizzas/order", pizzas: Pizza.all()))
+  end
+
   def create(conn, params) do
     Pizza.create(params)
     case params["file"] do

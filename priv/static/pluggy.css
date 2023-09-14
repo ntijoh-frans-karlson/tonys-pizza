@@ -1,4 +1,15 @@
-body {
+*{
+	margin: 0;
+	padding: 0;
+}
+
+#pizzas_container{
+	flex-direction: column;
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
 	background-color: peachpuff;
 }
 
@@ -14,4 +25,33 @@ body {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
+}
+
+#pizzas_h1{
+	margin: 15px;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#pizzas_table{
+	width: 100%;
+	display: table;
+	text-align: center;
+	width: 50%;
+	font-family: 'Courier New', Courier, monospace;
+	border: 4px dashed black;
+	background-color: #3fad76;
+}
+
+#pizzas_table tr th{
+	border: 2px solid black;
+}
+
+#pizzas_table tr td{
+	justify-content: center;
+	align-items: center;
+	border: 1px solid black;
+}
+
+#delete_button{
+	
 }

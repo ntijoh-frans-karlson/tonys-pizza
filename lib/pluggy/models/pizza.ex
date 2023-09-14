@@ -1,5 +1,5 @@
 defmodule Pluggy.Pizza do
-  defstruct(id: nil, name: "", options: "", extra_toppings: "", done: 0)
+  defstruct(id: nil, order_id: nil, name: "", options: "", extra_toppings: "", done: 0)
 
   alias Pluggy.Pizza
 
@@ -19,6 +19,6 @@ defmodule Pluggy.Pizza do
   end
 
   defp to_struct_list(rows) do
-    for [id, name, options, extra_toppings, done] <- rows, do: %Pizza{id: id, name: name, options: options, extra_toppings: extra_toppings, done: done}
+    for [id, order_id, name, options, extra_toppings, done] <- rows, do: %Pizza{id: id, order_id: order_id, name: name, options: options, extra_toppings: extra_toppings, done: done}
   end
 end
