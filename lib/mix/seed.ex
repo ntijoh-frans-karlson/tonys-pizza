@@ -32,14 +32,14 @@ defmodule Mix.Tasks.Seed do
   # "Create TABLE orders (id SERIAL, name VARCHAR(255) NOT NULL, glutenfri INTEGER NOT NULL, familjepizza INTEGER NOT NULL, extras VARCHAR(255), done INTEGER NOT NULL)
   defp create_tables() do
     IO.puts("Creating tables")
-    Postgrex.query!(DB, "Create TABLE pizzas (id INTEGER NOT NULL, name VARCHAR(255) NOT NULL, options VARCHAR(255) NOT NULL, extra_toppings VARCHAR(255) NOT NULL, done INTEGER NOT NULL)", [], pool: DBConnection.ConnectionPool)
+    Postgrex.query!(DB, "Create TABLE pizzas (id SERIAL, order_id INTEGER NOT NULL, name VARCHAR(255) NOT NULL, options VARCHAR(255) NOT NULL, extra_toppings VARCHAR(255) NOT NULL, done INTEGER NOT NULL)", [], pool: DBConnection.ConnectionPool)
   end
 
   defp seed_data() do
     IO.puts("Seeding data")
-    Postgrex.query!(DB, "INSERT INTO pizzas(id, name, options, extra_toppings, done) VALUES($1, $2, $3, $4, $5)", [0, "margharita", "gluten_free family_sized", "mushroom", 0])
-    Postgrex.query!(DB, "INSERT INTO pizzas(id, name, options, extra_toppings, done) VALUES($1, $2, $3, $4, $5)", [1, "funghi", "extra_cheese", "", 0])
-    Postgrex.query!(DB, "INSERT INTO pizzas(id, name, options, extra_toppings, done) VALUES($1, $2, $3, $4, $5)", [1, "vesuvio", "", "", 0])
+    Postgrex.query!(DB, "INSERT INTO pizzas(order_id, name, options, extra_toppings, done) VALUES($1, $2, $3, $4, $5)", [0, "margharita", "gluten_free family_sized", "mushroom", 1])
+    Postgrex.query!(DB, "INSERT INTO pizzas(order_id, name, options, extra_toppings, done) VALUES($1, $2, $3, $4, $5)", [1, "funghi", "extra_cheese", "", 0])
+    Postgrex.query!(DB, "INSERT INTO pizzas(order_id, name, options, extra_toppings, done) VALUES($1, $2, $3, $4, $5)", [1, "vesuvio", "", "", 0])
     # Postgrex.query!(DB, "INSERT INTO orders(name, glutenfri, familjepizza, extras, done) VALUES($1, $2, $3, $4, $5)", ["Margharita", 1, 1, "+ost, -tomat", 1], pool: DBConnection.ConnectionPool)
     # Postgrex.query!(DB, "INSERT INTO fruits(name, glutenfri, familjepizza, extras, done) VALUES($1, $2, $3, $4, $5)", ["Quattro Formaggio", 1, 0, "-ost, "], pool: DBConnection.ConnectionPool)
     # Postgrex.query!(DB, "INSERT INTO fruits(name, tastiness) VALUES($1, $2)", ["Banana", 7], pool: DBConnection.ConnectionPool)

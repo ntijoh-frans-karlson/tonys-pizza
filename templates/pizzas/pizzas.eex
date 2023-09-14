@@ -1,9 +1,47 @@
-<ul>
+<!-- <ul>
   <%= for pizza <- pizzas do %>
     <li>
-    	<p> 
-            Id: <%=pizza.id%>, Name: <%=pizza.name%>, Options: <%=pizza.options%>, Extra toppings:<%=pizza.extra_toppings%>, Done: <%=pizza.done%>
-		</p>
-	</li>
-  <% end %>
-</ul>
+      <p>
+        Order: <%=pizza.id%>,
+          Name: <%=pizza.name%>, Options: <%=pizza.options%>, Extra toppings:<%=pizza.extra_toppings%>, Done:
+                <%=pizza.done%>
+      </p>
+    </li>
+    <% end %>
+</ul> -->
+
+<div id = "pizzas_container">
+  <h1 id = "pizzas_h1">Orders</h1>
+  <table id = "pizzas_table">
+    <tr>
+      <th>Order ID</th>
+      <th>Pizza Name</th>
+      <th>Options</th>
+      <th>Extra toppings</th>
+      <th>Done?</th>
+    </tr>
+    <%=for pizza <- pizzas do %>
+      <tr>
+        <td> <%= pizza.order_id%> </td>
+        <td> <%= pizza.name%> </td>
+        <td> <%= pizza.options |> String.replace(" ", ", ") |> String.replace("_", " ")%> </td>
+        <td> <%= pizza.extra_toppings%> </td>
+        <td> 
+          <form action="/pizza/toggle_done/<%=pizza.id%>" method="POST">
+            <%= if pizza.done == 1 do %>
+              <input type="image" src="img/checkmark.svg"> 
+            <% else %>
+              <input type="image" src="img/cross.svg" alt="cross_icon"> 
+            <% end %>
+          </form>
+        </td>
+        <td> 
+          <form action="/pizza/delete/<%=pizza.id%>" method="POST">
+            <input type="image" src="img/trash-can.svg" alt="trash_icon">
+          </form>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+
