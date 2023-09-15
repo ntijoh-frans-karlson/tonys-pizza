@@ -3,7 +3,7 @@ defmodule Pluggy.Router do
   use Plug.Debugger
 
 
-  alias Pluggy.ReceiptControler
+  alias Pluggy.ReceiptController
   alias Pluggy.FruitController
   alias Pluggy.UserController
   alias Pluggy.PizzaController
@@ -35,9 +35,9 @@ defmodule Pluggy.Router do
   #post("/fruits", do: FruitController.create(conn, conn.body_params))
   get("/order", do: PizzaController.order(conn))
   get("/pizzas", do: PizzaController.index(conn))
-  get("/receits", do: ReceiptControler.index(conn))
+  get("/receipts", do: ReceiptController.index(conn))
 
-  post("/pizzas", do: FruitController.create(conn, conn.body_params))
+  post("/pizzas", do: PizzaController.create(conn, conn.body_params))
   post("/pizzas/toggle_done/:id", do: PizzaController.toggle_done(conn, id))
   post("/pizzas/delete/:id", do: PizzaController.delete(conn, id))
 

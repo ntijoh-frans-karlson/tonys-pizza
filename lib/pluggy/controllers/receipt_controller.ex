@@ -6,7 +6,7 @@ defmodule Pluggy.ReceiptController do
   import Plug.Conn, only: [send_resp: 3]
 
   def index(conn) do
-    send_resp(conn, 200, render("receipts/receipts", receipts: Pizza.all()))
+    conn = send_resp(conn, 200, render("pizzas/receipts", receipts: Pizza.all()))
   end
 
   defp redirect(conn, url) do
