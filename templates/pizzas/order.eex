@@ -15,7 +15,7 @@
                         <div class="pizza_buttons"><button class="edit">Anpassa<button class="buy">Köp</button></button></div>
                     </div>
                 </div>
-            <%=end %>
+            <%end %>
         </div>
     </div>
     <div class="cart">
