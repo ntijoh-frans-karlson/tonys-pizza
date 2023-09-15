@@ -6,7 +6,7 @@ defmodule Pluggy.PizzaController do
   import Plug.Conn, only: [send_resp: 3]
 
   def index(conn) do
-    send_resp(conn, 200, render("pizzas/pizzas", pizzas: Pizza.all()))
+    send_resp(conn, 200, render("pizzas/index", pizzas: Pizza.all()))
   end
 
   def order(conn) do

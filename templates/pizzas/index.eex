@@ -1,31 +1,36 @@
-<h1>Fruits.index (/fruits)</h1>
+<script>localStorage.setItem("basket", "[]")</script>
 
-<%= if user do %> 
-	<form action="/users/logout" method="post">
-		<button type="submit">Log Out</button>
-	</form>
-<% else %>
-
-<form action="/users/login" method="post">
-	<label for="username">Username</label>
-	<input type="text" name="username" id="username" />
-	<label for="password">Password</lagel>
-	<input type="password" name="pwd" id="password" />
-	<button type="submit">Log In</button>
-</form>
-<% end %>
-
-
-
-<ul>
-  <%= for fruit <- fruits do %>
-    <li>
-    	<a href="/fruits/<%= fruit.id %>">
-			<%= fruit.name %> - <%= fruit.tastiness %>
-		</a>
-	</li>
-  <% end %>
-</ul>
-<a href="/fruits/new">Add new fruit</a>
-
-
+<div class="main_body">
+    <div class="content">
+        <img src="img/tonys-pizza-logo.svg" alt="" class="header">
+        <div class="pizza_menu">
+            <%= for pizza <- pizzas do%>
+                <div class="pizza_card">
+                    <img src="/img/<%=String.downcase(pizza.name) |> String.replace("\s","-")%>.svg" alt="margherita" class="pizza_img">
+                    <div class="pizza_text">
+                        <p class="pizza_name"><%=pizza.name%></p>
+                        <%= for ingredient <- pizza.toppings do%>
+                            <p><%=ingredient%></p>
+                        <%end%>
+                        <div class="pizza_buttons"><button class="edit">Anpassa<button class="buy">Köp</button></button></div>
+                    </div>
+                </div>
+            <%end %>
+        </div>
+    </div>
+    <div class="cart">
+        <img src="img/tonys-pizza-basket.svg" alt="" class="cart_icon">
+        <div class="cart_contents">
+            <div class="cart_item">
+                <p class="cart_pizza_name">Margharita</p>
+                <div class="cart_buttons">
+                    <button class="cart_edit">Edit</button>
+                    <button class="cart_remove">Remove</button>
+                </div>
+                <div class="dropdown_content">
+                    <div class="dropdown_item"><p>Gluten_free</p><input type="checkbox"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
