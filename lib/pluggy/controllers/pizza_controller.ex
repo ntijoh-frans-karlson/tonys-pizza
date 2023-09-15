@@ -10,10 +10,10 @@ defmodule Pluggy.PizzaController do
   end
 
   def order(conn) do
-    send_resp(conn, 200, render("pizzas/order", pizzas: Pizza.all()))
+    send_resp(conn, 200, render("pizzas/order", pizzas: Pizza.recipes()))
   end
 
-  
+
   def create(conn, params) do
     Pizza.create(params)
     case params["file"] do
@@ -23,7 +23,7 @@ defmodule Pluggy.PizzaController do
     end
     redirect(conn, "/pizzas")
   end
-  
+
   def delete(conn, id) do
     id = String.to_integer(id)
     Pizza.delete(id)
