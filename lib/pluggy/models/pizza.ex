@@ -8,7 +8,7 @@ defmodule Pluggy.Pizza do
   end
 
   def recipes() do
-    Postgrex.query!(DB, "SELECT * FROM pecipes", [], pool: DBConnection.ConnectionPool).rows
+    Postgrex.query!(DB, "SELECT * FROM recipes", [], pool: DBConnection.ConnectionPool).rows
   end
 
   def create(params) do

@@ -94,8 +94,30 @@ button {
 	height: 50vh;
 	width: 100%;
 	border-style: solid;
+	border-width: 1px;
+	border-radius: 3px;
+	padding: 3px;
 }
 
+.cart_item {
+	border-style: solid;
+	border-width: 1px;
+	border-radius: 3px;
+}
+.dropdown_content {
+	display: none;
+	border-style: solid;
+	border-width: 1px;
+	margin: 1px;
+}
+
+.dropdown_item {
+	display: flex;
+}
+
+.cart_edit:hover ~ .dropdown_content {
+	display: block;
+}
 #pizzas_container{
 	flex-direction: column;
 	height: 100vh;

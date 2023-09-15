@@ -21,7 +21,16 @@
     <div class="cart">
         <img src="img/tonys-pizza-basket.svg" alt="" class="cart_icon">
         <div class="cart_contents">
-            <p>Pizza</p>
+            <div class="cart_item">
+                <p class="cart_pizza_name">Margharita</p>
+                <div class="cart_buttons">
+                    <button class="cart_edit">Edit</button>
+                    <button class="cart_remove">Remove</button>
+                </div>
+                <div class="dropdown_content">
+                    <div class="dropdown_item"><p>Gluten_free</p><input type="checkbox"></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
