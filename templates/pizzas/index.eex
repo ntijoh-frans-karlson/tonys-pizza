@@ -2,7 +2,7 @@
 
 <div class="main_body">
     <div class="content">
-        <img src="img/tonys-pizza-logo.svg" alt="" class="header">
+        <img src="/img/tonys-pizza-logo.svg" alt="" class="header">
         <div class="pizza_menu">
             <%= for pizza <- pizzas do%>
                 <div class="pizza_card">
@@ -12,14 +12,24 @@
                         <%= for ingredient <- pizza.toppings do%>
                             <p><%=ingredient%></p>
                         <%end%>
-                        <div class="pizza_buttons"><button class="edit">Anpassa<button class="buy">Köp</button></button></div>
+                        <div class="pizza_buttons">
+                            <button class="edit">Anpassa</button>
+                            <form action="/pizzas/new" method="post">
+                                <input type="hidden" name="name" value="<%=pizza.name%>"/>
+                                <input type="hidden" name="order_id" value="0">
+                                <input type="hidden" name="options" value="[]"/>
+                                <input type="hidden" name="extra_toppings" value="[]"/>
+                                <button class="buy"type="submit">Köp</button>
+                            </form>
+                        </div> 
+                        
                     </div>
                 </div>
             <%end %>
         </div>
     </div>
     <div class="cart">
-        <img src="img/tonys-pizza-basket.svg" alt="" class="cart_icon">
+        <img src="/img/tonys-pizza-basket.svg" alt="" class="cart_icon">
         <div class="cart_contents">
             <div class="cart_item">
                 <p class="cart_pizza_name">Margharita</p>

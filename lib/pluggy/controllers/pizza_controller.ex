@@ -15,12 +15,7 @@ defmodule Pluggy.PizzaController do
 
 
   def create(conn, params) do
-    Pizza.create(params)
-    case params["file"] do
-      nil -> IO.puts("No file uploaded")  #do nothing
-      # move uploaded file from tmp-folder
-      _  -> File.rename(params["file"].path, "priv/static/uploads/#{params["file"].filename}")
-    end
+    Pizza.new_order(params)
     redirect(conn, "/pizzas")
   end
 
