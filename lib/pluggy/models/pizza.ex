@@ -28,35 +28,40 @@ defmodule Pluggy.Pizza do
     |> to_struct_list()
   end
 
-  # def all do
-  #   Postgrex.query!(DB, "SELECT * FROM pizzas ORDER BY id", [], pool: DBConnection.ConnectionPool).rows |> to_struct_list()
-  # end
+  def get_toppings_from_name(pizza_name) do
+    pizza_map = 
+    pizza_name
+    |> pizza_id_from_name
+    |> get
 
-  def orders() do
-    Postgrex.query!(DB, "SELECT * FROM recipes", [], pool: DBConnection.ConnectionPool).rows
+    pizza_map.toppings
   end
-
-  def create(params) do
-    id = params["id"]
-    name = params["name"]
-    options = params["options"]
-    extra_toppings = params["extra_toppings"]
-
-    Postgrex.query!(DB, "INSERT INTO pizzas (id, name, options, extra_toppings) VALUES ($1, $2, $3, $4)", [id, name, options, extra_toppings],
-      pool: DBConnection.ConnectionPool
-    )
-  end
-
-  def delete(id) do
-    Postgrex.query!(DB, "DELETE FROM pizzas WHERE id = $1", [id])
-  end
-
-  def toggle_done(id) do
-    if Postgrex.query!(DB, "SELECT done FROM pizzas WHERE id = $1", [id]).rows |> hd |> hd == 1 do
-      Postgrex.query!(DB, "UPDATE pizzas SET done = 0 WHERE id = $1", [id])
-    else
-      Postgrex.query!(DB, "UPDATE pizzas SET done = 1 WHERE id = $1", [id])
+  
+  def create(pizza_map) do
+    max_id = (Postgrex.query!(DB, "SELECT MAX(id) FROM pizzas", [], pool: DBConnection.ConnectionPool).rows |> hd |> hd)
+    new_id = max_id + 1
+    
+    
+    
+    name = pizza_map.name
+    toppings = pizza_map.toppings
+    
+    Postgrex.query!(DB, "INSERT INTO pizzas (id, name) VALUES ($1, $2)", [new_id, name], pool: DBConnection.ConnectionPool)
+    
+    for topping <- toppings do
+      topping_id = topping_name_to_id(topping)
+      Postgrex.query!(DB, "INSERT INTO recipes (pizza_id, ingredient_id) VALUES ($1, $2)", [new_id, topping_id], pool: DBConnection.ConnectionPool)
     end
+    
+    new_id
+  end
+  
+  def topping_name_to_id(name) do
+    Postgrex.query!(DB, "SELECT id FROM ingredients WHERE name = $1", [name], pool: DBConnection.ConnectionPool).rows |> hd |> hd
+  end
+
+  defp pizza_id_from_name(name) do
+    Postgrex.query!(DB, "SELECT id FROM pizzas WHERE name = $1", [name], pool: DBConnection.ConnectionPool).rows |> hd |> hd
   end
 
   defp to_struct(rows) do
