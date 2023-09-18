@@ -4,7 +4,7 @@ defmodule Pluggy.Order do
     alias Pluggy.Option
 
     def create(pizza_map, order_id, id_in_pizzas_table, pizza_id_in_order) do
-        if pizza_map.options == [] do 
+        if pizza_map.options == [] do
             Postgrex.query!(DB, "INSERT INTO orders(order_id, pizza_id, pizza, options) VALUES ($1, $2, $3, $4)", [order_id, pizza_id_in_order, id_in_pizzas_table, 0], pool: DBConnection.ConnectionPool)
         else
             for option <- pizza_map.options do
@@ -14,8 +14,13 @@ defmodule Pluggy.Order do
         end
     end
 
+    def new_pizza_id(order_id) do
+        max_id = Postgrex.query!(DB, "SELECT MAX(pizza_id) FROM orders WHERE order_id = $1", [order_id], pool: DBConnection.ConnectionPool).rows |> hd |> hd
+        max_id + 1
+    end
+
     def max_order_id do
-        Postgrex.query!(DB, "SELECT MAX(order_id) FROM orders", [], pool: DBConnection.ConnectionPool).rows |> hd |> hd 
+        Postgrex.query!(DB, "SELECT MAX(order_id) FROM orders", [], pool: DBConnection.ConnectionPool).rows |> hd |> hd
     end
 
     def all_orders() do
@@ -25,7 +30,7 @@ defmodule Pluggy.Order do
     def delete(id) do
         Postgrex.query!(DB, "DELETE FROM pizzas WHERE id = $1", [id])
     end
-    
+
     def toggle_done(id) do
         if Postgrex.query!(DB, "SELECT done FROM pizzas WHERE id = $1", [id]).rows |> hd |> hd == 1 do
             Postgrex.query!(DB, "UPDATE pizzas SET done = 0 WHERE id = $1", [id])

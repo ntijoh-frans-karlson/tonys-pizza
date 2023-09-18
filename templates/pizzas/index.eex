@@ -16,9 +16,9 @@
                             <button class="edit">Anpassa</button>
                             <form action="/pizzas/new" method="post">
                                 <input type="hidden" name="name" value="<%=pizza.name%>"/>
-                                <input type="hidden" name="order_id" value="0">
-                                <input type="hidden" name="options" value="[]"/>
-                                <input type="hidden" name="extra_toppings" value="[]"/>
+                                <input type="hidden" name="order_id" value=0>
+                                <input type="hidden" name="options" value=""/>
+                                <input type="hidden" name="extra_toppings" value=""/>
                                 <button class="buy"type="submit">Köp</button>
                             </form>
                         </div> 

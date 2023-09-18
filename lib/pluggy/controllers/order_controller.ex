@@ -3,6 +3,8 @@ defmodule Pluggy.OrderController do
     alias Pluggy.Pizza
     alias Pluggy.Order
 
+    import Pluggy.Template, only: [render: 2]
+    import Plug.Conn, only: [send_resp: 3]
 
     def create_order(conn, pizza_map) do
         # input_list =
@@ -13,6 +15,9 @@ defmodule Pluggy.OrderController do
         # ]
 
         pizza_map = for {key, val} <- pizza_map, into: %{}, do: {String.to_atom(key), val}
+        pizza_map = Map.replace(pizza_map,:extra_toppings, [])
+        pizza_map = Map.replace(pizza_map,:options, [])
+        pizza_map = Map.replace(pizza_map,:order_id, 0)
 
         finished_map =
         if pizza_map.extra_toppings == [] do
@@ -32,7 +37,7 @@ defmodule Pluggy.OrderController do
 
         id_in_pizzas_table = finished_map |> Pizza.create
         finished_map |> Order.create(pizza_map.order_id, id_in_pizzas_table, pizza_id_in_order)
-
+        redirect(conn, "/pizzas")
         conn
     end
 
@@ -78,4 +83,9 @@ defmodule Pluggy.OrderController do
 
         %{name: final_pizza_name, options: pizzas.ordered_pizza.options, toppings: pizzas.ordered_pizza.toppings}
     end
+
+    defp redirect(conn, url) do
+        Plug.Conn.put_resp_header(conn, "location", url) |> send_resp(303, "")
+    end
+
 end
