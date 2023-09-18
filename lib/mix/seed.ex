@@ -40,6 +40,8 @@ defmodule Mix.Tasks.Seed do
     Postgrex.query!(DB,"CREATE TABLE pizzas(id SERIAL, name VARCHAR(255))", [], pool: DBConnection.ConnectionPool)
     Postgrex.query!(DB,"CREATE TABLE ingredients(id SERIAL, name VARCHAR(255))", [], pool: DBConnection.ConnectionPool)
     Postgrex.query!(DB,"CREATE TABLE recipes(pizza_id INTEGER, ingredient_id INTEGER)", [], pool: DBConnection.ConnectionPool)
+    # Postgrex.query!(DB,"CREATE TABLE orders(order_id INTEGER, pizza_id INTEGER)", [], pool: DBConnection.ConnectionPool)
+    # Postgrex.query!(DB,"CREATE TABLE options(order_id INTEGER, option VARCHAR(255))", [], pool: DBConnection.ConnectionPool)
   end
 
   @margherita 1
@@ -58,14 +60,14 @@ defmodule Mix.Tasks.Seed do
     Postgrex.query!(DB,"INSERT INTO pizzas(name) VALUES($1)", ["Diavola"])            #8
 
     Postgrex.query!(DB,"INSERT INTO ingredients(name) VALUES($1)", ["Tomatsås"])       #1
-    Postgrex.query!(DB,"INSERT INTO ingredients(name) VALUES($1)", ["Mozarella"])      #2
+    Postgrex.query!(DB,"INSERT INTO ingredients(name) VALUES($1)", ["Mozzarella"])      #2
     Postgrex.query!(DB,"INSERT INTO ingredients(name) VALUES($1)", ["Basilika"])       #3
     Postgrex.query!(DB,"INSERT INTO ingredients(name) VALUES($1)", ["Skinka"])         #4
     Postgrex.query!(DB,"INSERT INTO ingredients(name) VALUES($1)", ["Svamp"])          #5
     Postgrex.query!(DB,"INSERT INTO ingredients(name) VALUES($1)", ["Kronärtskocka"])  #6
     Postgrex.query!(DB,"INSERT INTO ingredients(name) VALUES($1)", ["Parmesan"])       #7
     Postgrex.query!(DB,"INSERT INTO ingredients(name) VALUES($1)", ["Peccorino"])      #8
-    Postgrex.query!(DB,"INSERT INTO ingredients(name) VALUES($1)", ["Gorgonsola"])     #9
+    Postgrex.query!(DB,"INSERT INTO ingredients(name) VALUES($1)", ["Gorgonzola"])     #9
     Postgrex.query!(DB,"INSERT INTO ingredients(name) VALUES($1)", ["Paprika"])        #10
     Postgrex.query!(DB,"INSERT INTO ingredients(name) VALUES($1)", ["Aubergine"])      #11
     Postgrex.query!(DB,"INSERT INTO ingredients(name) VALUES($1)", ["Zucchini"])       #12
@@ -84,6 +86,10 @@ defmodule Mix.Tasks.Seed do
     Postgrex.query!(DB, "INSERT INTO recipes(pizza_id, ingredient_id) VALUES($1, $2)", [2, 6])
 
     Postgrex.query!(DB, "INSERT INTO recipes(pizza_id, ingredient_id) VALUES($1, $2)", [3, 1])
+
+    # Postgrex.query!(DB, "INSERT INTO orders(order_id, pizza_id) VALUES($1, $2)", [1, 1])
+
+    # Postgrex.query!(DB, "INSERT INTO options(pizza_id, ingredient_id) VALUES($1, $2)", [3, 1])
 
 
 

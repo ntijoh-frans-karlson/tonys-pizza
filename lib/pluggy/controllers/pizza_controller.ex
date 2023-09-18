@@ -9,8 +9,8 @@ defmodule Pluggy.PizzaController do
     send_resp(conn, 200, render("pizzas/index", pizzas: Pizza.all()))
   end
 
-  def order(conn) do
-    send_resp(conn, 200, render("pizzas/order", pizzas: Pizza.recipes()))
+  def orders(conn) do
+    send_resp(conn, 200, render("pizzas/orders", pizzas: Pizza.orders()))
   end
 
 

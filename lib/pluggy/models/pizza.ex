@@ -32,7 +32,7 @@ defmodule Pluggy.Pizza do
   #   Postgrex.query!(DB, "SELECT * FROM pizzas ORDER BY id", [], pool: DBConnection.ConnectionPool).rows |> to_struct_list()
   # end
 
-  def recipes() do
+  def orders() do
     Postgrex.query!(DB, "SELECT * FROM recipes", [], pool: DBConnection.ConnectionPool).rows
   end
 
