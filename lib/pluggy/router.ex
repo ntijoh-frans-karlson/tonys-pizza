@@ -28,29 +28,16 @@ defmodule Pluggy.Router do
   plug(:match)
   plug(:dispatch)
 
-  get("/fruits", do: FruitController.index(conn))
-  get("/fruits/new", do: FruitController.new(conn))
-  get("/fruits/:id", do: FruitController.show(conn, id))
-  get("/fruits/:id/edit", do: FruitController.edit(conn, id))
 
-  #post("/fruits", do: FruitController.create(conn, conn.body_params))
-  get("/orders", do: PizzaController.orders(conn))
-  get("/pizzas", do: PizzaController.index(conn))
   get("/receipts", do: ReceiptController.index(conn))
 
-  post("/pizzas", do: PizzaController.create(conn, conn.body_params))
-  post("/pizzas/new", do: OrderController.create_order(conn, conn.body_params))
-  post("/pizzas/toggle_done/:id", do: PizzaController.toggle_done(conn, id))
-  post("/pizzas/delete/:id", do: PizzaController.delete(conn, id))
+  get("/pizzas", do: PizzaController.index(conn))
+  post("/pizzas/new", do: OrderController.create(conn, conn.body_params))
 
-  # should be put /fruits/:id, but put/patch/delete are not supported without hidden inputs
-  post("/fruits/:id/edit", do: FruitController.update(conn, id, conn.body_params))
+  get("/orders", do: OrderController.orders(conn))
+  post("/orders/toggle_pizza_done/:id", do: OrderController.toggle_done(conn, id))
+  post("/orders/delete_pizza/:id", do: OrderController.delete(conn, id))
 
-  # should be delete /fruits/:id, but put/patch/delete are not supported without hidden inputs
-  post("/fruits/:id/destroy", do: FruitController.destroy(conn, id))
-
-  post("/users/login", do: UserController.login(conn, conn.body_params))
-  post("/users/logout", do: UserController.logout(conn))
 
   match _ do
     send_resp(conn, 404, "oops")
