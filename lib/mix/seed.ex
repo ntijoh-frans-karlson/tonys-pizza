@@ -44,7 +44,7 @@ defmodule Mix.Tasks.Seed do
     Postgrex.query!(DB,"CREATE TABLE ingredients(id SERIAL, name VARCHAR(255))", [], pool: DBConnection.ConnectionPool)
     Postgrex.query!(DB,"CREATE TABLE recipes(pizza_id INTEGER, ingredient_id INTEGER)", [], pool: DBConnection.ConnectionPool)
     Postgrex.query!(DB,"CREATE TABLE options(id serial, name VARCHAR)", [], pool: DBConnection.ConnectionPool)
-    Postgrex.query!(DB,"CREATE TABLE orders(order_id INTEGER, pizza_id INTEGER, pizza INTEGER, options INTEGER, done INTEGER DEFAULT 0)", [], pool: DBConnection.ConnectionPool)
+    Postgrex.query!(DB,"CREATE TABLE orders(order_id INTEGER, pizza_id INTEGER, pizza INTEGER, options INTEGER,ordered INTEGER DEFAULT 0, done INTEGER DEFAULT 0)", [], pool: DBConnection.ConnectionPool)
     # Postgrex.query!(DB,"CREATE TABLE orders(order_id INTEGER, pizza_id INTEGER)", [], pool: DBConnection.ConnectionPool)
     # Postgrex.query!(DB,"CREATE TABLE options(order_id INTEGER, option VARCHAR(255))", [], pool: DBConnection.ConnectionPool)
   end
