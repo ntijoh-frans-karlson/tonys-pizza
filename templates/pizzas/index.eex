@@ -38,11 +38,12 @@
                     <button class="cart_edit">Edit</button>
                     <button class="cart_remove">Remove</button>
                 </div>
-                <div class="dropdown_content">
-                    <div class="dropdown_item"><p>Gluten_free</p><input type="checkbox"></div>
-                </div>
             </div>
             <%end %>
+            <form action="/orders/orderall" method="post">
+                <button class="buy" class="orderall" type="submit">Order all</button>
+            </form>
         </div>
     </div>
+
 </div>

@@ -139,6 +139,10 @@ defmodule Pluggy.Order do
         Postgrex.query!(DB, "SELECT pizzas.name FROM orders INNER JOIN pizzas ON orders.pizza =  pizzas.id WHERE order_id = $1 AND ordered = $2", [id, 0]).rows |> List.flatten |> IO.inspect
     end
 
+    def order_all() do
+      Postgrex.query!(DB, "UPDATE orders SET ordered = 1 WHERE order_id = $1", [0])
+    end
+
     def to_struct(rows) do
         rows
         |> Enum.reduce([], fn [order_id, pizza_id, name, option, done], acc -> [%Order{order_id: order_id, pizza_id: pizza_id, name: name, option: option, done: done} | acc] end )

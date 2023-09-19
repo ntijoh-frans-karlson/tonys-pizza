@@ -30,6 +30,11 @@ defmodule Pluggy.OrderController do
         redirect(conn, "/orders")
     end
 
+    def order_all(conn) do
+      Order.order_all()
+      redirect(conn, "/recipts")
+    end
+
     defp redirect(conn, url) do
         Plug.Conn.put_resp_header(conn, "location", url) |> send_resp(303, "")
     end

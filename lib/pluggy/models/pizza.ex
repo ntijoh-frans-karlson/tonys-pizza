@@ -23,39 +23,40 @@ defmodule Pluggy.Pizza do
       ON pizzas.id = recipes.pizza_id
       INNER JOIN ingredients
       ON ingredients.id = recipes.ingredient_id
+
     """
     Postgrex.query!(DB, query, [], pool: DBConnection.ConnectionPool).rows #|> to_struct_list()
     |> to_struct_list()
   end
 
   def get_toppings_from_name(pizza_name) do
-    pizza_map = 
+    pizza_map =
     pizza_name
     |> pizza_id_from_name
     |> get
 
     pizza_map.toppings
   end
-  
+
   def create(pizza_map) do
     max_id = (Postgrex.query!(DB, "SELECT MAX(id) FROM pizzas", [], pool: DBConnection.ConnectionPool).rows |> hd |> hd)
     new_id = max_id + 1
-    
-    
-    
+
+
+
     name = pizza_map.name
     toppings = pizza_map.toppings
-    
+
     Postgrex.query!(DB, "INSERT INTO pizzas (id, name) VALUES ($1, $2)", [new_id, name], pool: DBConnection.ConnectionPool)
-    
+
     for topping <- toppings do
       topping_id = topping_name_to_id(topping)
       Postgrex.query!(DB, "INSERT INTO recipes (pizza_id, ingredient_id) VALUES ($1, $2)", [new_id, topping_id], pool: DBConnection.ConnectionPool)
     end
-    
+
     new_id
   end
-  
+
   def topping_name_to_id(name) do
     Postgrex.query!(DB, "SELECT id FROM ingredients WHERE name = $1", [name], pool: DBConnection.ConnectionPool).rows |> hd |> hd
   end

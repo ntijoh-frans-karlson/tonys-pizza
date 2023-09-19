@@ -37,7 +37,7 @@ defmodule Pluggy.Router do
   get("/orders", do: OrderController.orders(conn))
   post("/orders/toggle_pizza_done/:pizza_id/:order_id", do: OrderController.toggle_done(conn, pizza_id, order_id))
   post("/orders/delete_pizza/:pizza_id/:order_id", do: OrderController.delete(conn, pizza_id, order_id))
-
+  post("/orders/orderall", do: OrderController.order_all(conn))
 
   match _ do
     send_resp(conn, 404, "oops")
