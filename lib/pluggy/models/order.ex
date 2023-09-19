@@ -1,4 +1,7 @@
 defmodule Pluggy.Order do
+    defstruct(order_id: nil, pizza_id: nil, name: "", option: "", done: 0)
+
+
 
     alias Pluggy.Order
     alias Pluggy.Option
@@ -92,6 +95,10 @@ defmodule Pluggy.Order do
         end
     end
 
+    def all_ordered_list do 
+
+    end
+
     def new_pizza_id(order_id) do
         max_id = Postgrex.query!(DB, "SELECT MAX(pizza_id) FROM orders WHERE order_id = $1", [order_id], pool: DBConnection.ConnectionPool).rows |> hd |> hd
         max_id + 1
@@ -102,22 +109,38 @@ defmodule Pluggy.Order do
     end
 
     def all_orders() do
-        Postgrex.query!(DB, "SELECT * FROM orders", [], pool: DBConnection.ConnectionPool).rows
+        query =
+        """
+        SELECT orders.order_id, orders.pizza_id, pizzas.name, options.name AS option, done FROM orders
+        LEFT JOIN pizzas
+        ON orders.pizza = pizzas.id
+        LEFT JOIN options
+        ON orders.options = options.id
+        ORDER BY orders.pizza_id desc
+        """
+
+        Postgrex.query!(DB, query, [], pool: DBConnection.ConnectionPool).rows
+        |> to_struct
     end
 
-    def delete(id) do
-        Postgrex.query!(DB, "DELETE FROM pizzas WHERE id = $1", [id])
+    def delete(pizza_id, order_id) do
+        Postgrex.query!(DB, "DELETE FROM orders WHERE pizza_id = $1 AND order_id = $2", [pizza_id, order_id])
     end
 
-    def toggle_done(id) do
-        if Postgrex.query!(DB, "SELECT done FROM pizzas WHERE id = $1", [id]).rows |> hd |> hd == 1 do
-            Postgrex.query!(DB, "UPDATE pizzas SET done = 0 WHERE id = $1", [id])
+    def toggle_done(pizza_id, order_id) do
+        if Postgrex.query!(DB, "SELECT done FROM orders WHERE pizza_id = $1 AND order_id = $2", [pizza_id, order_id]).rows |> hd |> hd == 1 do
+            Postgrex.query!(DB, "UPDATE orders SET done = 0 WHERE pizza_id = $1 AND order_id = $2", [pizza_id, order_id])
         else
-            Postgrex.query!(DB, "UPDATE pizzas SET done = 1 WHERE id = $1", [id])
+            Postgrex.query!(DB, "UPDATE orders SET done = 1 WHERE pizza_id = $1 AND order_id = $2", [pizza_id, order_id])
         end
     end
 
-    def user_basket() do
+    def user_basket(id) do
+        Postgrex.query!(DB, "SELECT pizzas.name FROM orders INNER JOIN pizzas ON orders.pizza WHERE order_id = $1 AND ordered = $2", [id, 0]).rows |> List.flatten |> IO.inspect
+    end
 
+    def to_struct(rows) do
+        rows
+        |> Enum.reduce([], fn [order_id, pizza_id, name, option, done], acc -> [%Order{order_id: order_id, pizza_id: pizza_id, name: name, option: option, done: done} | acc] end )
     end
 end

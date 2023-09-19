@@ -7,7 +7,7 @@ defmodule Pluggy.OrderController do
     import Plug.Conn, only: [send_resp: 3]
 
     def orders(conn) do
-        send_resp(conn, 200, render("pizzas/orders", pizzas: Pizza.orders()))
+        send_resp(conn, 200, render("pizzas/orders", orders: Order.all_orders()))
     end
 
 
@@ -16,16 +16,18 @@ defmodule Pluggy.OrderController do
         redirect(conn, "/pizzas")
     end
 
-    def delete(conn, id) do
-        id = String.to_integer(id)
-        Pizza.delete(id)
-        redirect(conn, "/pizzas")
+    def delete(conn, pizza_id, order_id) do
+        pizza_id = String.to_integer(pizza_id)
+        order_id = String.to_integer(order_id)
+        Order.delete(pizza_id, order_id)
+        redirect(conn, "/orders")
     end
 
-    def toggle_done(conn, id) do
-        id = String.to_integer(id)
-        Pizza.toggle_done(id)
-        redirect(conn, "/pizzas")
+    def toggle_done(conn, pizza_id, order_id) do
+        pizza_id = String.to_integer(pizza_id)
+        order_id = String.to_integer(order_id)
+        Order.toggle_done(pizza_id, order_id)
+        redirect(conn, "/orders")
     end
 
     defp redirect(conn, url) do
