@@ -7,10 +7,12 @@ defmodule Pluggy.PizzaController do
   import Plug.Conn, only: [send_resp: 3]
 
   def index(conn) do
-    send_resp(conn, 200, render("pizzas/index", pizzas: Pizza.all()))
+    send_resp(conn, 200, render("pizzas/index", pizzas: Pizza.all(), basket: Order.user_basket(0)))
   end
 
   defp redirect(conn, url) do
     Plug.Conn.put_resp_header(conn, "location", url) |> send_resp(303, "")
   end
+
+
 end

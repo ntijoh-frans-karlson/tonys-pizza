@@ -117,7 +117,7 @@ defmodule Pluggy.Order do
         end
     end
 
-    def user_basket() do
-
+    def user_basket(id) do
+        Postgrex.query!(DB, "SELECT pizzas.name FROM orders INNER JOIN pizzas ON orders.pizza = pizzas.id WHERE order_id = $1 AND ordered = $2" , [id,0]).rows |> List.flatten |> IO.inspect()
     end
 end
