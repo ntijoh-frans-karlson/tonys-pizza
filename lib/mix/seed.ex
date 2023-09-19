@@ -126,9 +126,9 @@ defmodule Mix.Tasks.Seed do
     Postgrex.query!(DB, "INSERT INTO recipes(pizza_id, ingredient_id) VALUES($1, $2)", [8, 10])
     Postgrex.query!(DB, "INSERT INTO recipes(pizza_id, ingredient_id) VALUES($1, $2)", [8, 15])
 
-    Postgrex.query!(DB, "INSERT INTO orders(order_id, pizza_id, pizza, options) VALUES($1, $2, $3, $4)", [0, 0, 4, 1])
-    Postgrex.query!(DB, "INSERT INTO orders(order_id, pizza_id, pizza, options) VALUES($1, $2, $3, $4)", [0, 0, 4, 2])
-    Postgrex.query!(DB, "INSERT INTO orders(order_id, pizza_id, pizza, options) VALUES($1, $2, $3, $4)", [0, 1, 2, 0])
+    Postgrex.query!(DB, "INSERT INTO orders(order_id, pizza_id, pizza, options, ordered) VALUES($1, $2, $3, $4, $5)", [0, 0, 4, 1, 1])
+    Postgrex.query!(DB, "INSERT INTO orders(order_id, pizza_id, pizza, options, ordered) VALUES($1, $2, $3, $4, $5)", [0, 1, 1, 0, 1])
+    Postgrex.query!(DB, "INSERT INTO orders(order_id, pizza_id, pizza, options, ordered) VALUES($1, $2, $3, $4, $5)", [1, 0, 6, 2, 1])
     # Postgrex.query!(DB, "INSERT INTO orders(order_id, pizza_id) VALUES($1, $2)", [1, 1])
 
     # Postgrex.query!(DB, "INSERT INTO options(pizza_id, ingredient_id) VALUES($1, $2)", [3, 1])

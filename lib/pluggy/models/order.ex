@@ -110,12 +110,14 @@ defmodule Pluggy.Order do
 
     def all_orders() do
         query =
+
         """
         SELECT orders.order_id, orders.pizza_id, pizzas.name, options.name AS option, done FROM orders
         LEFT JOIN pizzas
         ON orders.pizza = pizzas.id
         LEFT JOIN options
         ON orders.options = options.id
+        WHERE orders.ordered = 1
         ORDER BY orders.pizza_id desc
         """
 
