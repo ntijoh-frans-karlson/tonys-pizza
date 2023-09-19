@@ -31,5 +31,11 @@
       </tr>
     <% end %>
   </table>
+
+  <%= if orders == [] do%>
+    <h2 id = pizzas_h1>No Orders Left... Capiche?</h2>
+    <a id = "menu_link" href="/pizzas"><- go to menu</a>
+  <% end %>
+
 </div>
 
