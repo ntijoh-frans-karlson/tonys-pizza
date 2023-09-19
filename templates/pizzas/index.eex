@@ -21,8 +21,8 @@
                                 <input type="hidden" name="extra_toppings" value=""/>
                                 <button class="buy"type="submit">Köp</button>
                             </form>
-                        </div> 
-                        
+                        </div>
+
                     </div>
                 </div>
             <%end %>
@@ -31,8 +31,9 @@
     <div class="cart">
         <img src="/img/tonys-pizza-basket.svg" alt="" class="cart_icon">
         <div class="cart_contents">
-            <div class="cart_item">
-                <p class="cart_pizza_name">Margharita</p>
+            <%=for pizza <- basket do%>
+                            <div class="cart_item">
+                <p class="cart_pizza_name"><%=pizza %></p>
                 <div class="cart_buttons">
                     <button class="cart_edit">Edit</button>
                     <button class="cart_remove">Remove</button>
@@ -41,6 +42,7 @@
                     <div class="dropdown_item"><p>Gluten_free</p><input type="checkbox"></div>
                 </div>
             </div>
+            <%end %>
         </div>
     </div>
 </div>

@@ -95,7 +95,7 @@ defmodule Pluggy.Order do
         end
     end
 
-    def all_ordered_list do 
+    def all_ordered_list do
 
     end
 
@@ -136,7 +136,7 @@ defmodule Pluggy.Order do
     end
 
     def user_basket(id) do
-        Postgrex.query!(DB, "SELECT pizzas.name FROM orders INNER JOIN pizzas ON orders.pizza WHERE order_id = $1 AND ordered = $2", [id, 0]).rows |> List.flatten |> IO.inspect
+        Postgrex.query!(DB, "SELECT pizzas.name FROM orders INNER JOIN pizzas ON orders.pizza =  pizzas.id WHERE order_id = $1 AND ordered = $2", [id, 0]).rows |> List.flatten |> IO.inspect
     end
 
     def to_struct(rows) do
