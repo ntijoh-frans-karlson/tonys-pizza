@@ -23,7 +23,7 @@ defmodule Pluggy.Pizza do
       ON pizzas.id = recipes.pizza_id
       INNER JOIN ingredients
       ON ingredients.id = recipes.ingredient_id
-
+      WHERE pizzas.id < 9
     """
     Postgrex.query!(DB, query, [], pool: DBConnection.ConnectionPool).rows #|> to_struct_list()
     |> to_struct_list()

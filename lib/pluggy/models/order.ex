@@ -11,10 +11,26 @@ defmodule Pluggy.Order do
     def create_order(pizza_map) do
 
         pizza_map = for {key, val} <- pizza_map, into: %{}, do: {String.to_atom(key), val}
-        pizza_map = Map.replace(pizza_map,:extra_toppings, [])
-        pizza_map = Map.replace(pizza_map,:options, [])
+
+
+        pizza_map =
+        if pizza_map.options == "" do
+            Map.replace(pizza_map,:options, [])
+        else
+            Map.replace(pizza_map,:options, ["Gluten free"])
+        end
+
+        pizza_map =
+        if pizza_map.extra_toppings == "" do
+            Map.replace(pizza_map,:extra_toppings, [])
+        else
+            Map.replace(pizza_map,:extra_toppings, ["Mozzarella", "Basilika"])
+        end
         pizza_map = Map.replace(pizza_map,:order_id, 0)
 
+        IO.inspect(pizza_map.options)
+        IO.inspect(pizza_map.extra_toppings)
+        IO.inspect(pizza_map)
         finished_map =
         if pizza_map.extra_toppings == [] do
             pizza_map = Map.put(pizza_map, :toppings, Pizza.get_toppings_from_name(pizza_map.name))

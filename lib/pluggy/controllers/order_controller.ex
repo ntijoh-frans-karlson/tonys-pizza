@@ -32,7 +32,7 @@ defmodule Pluggy.OrderController do
 
     def order_all(conn) do
       Order.order_all()
-      redirect(conn, "/recipts")
+      redirect(conn, "/receipts")
     end
 
     defp redirect(conn, url) do

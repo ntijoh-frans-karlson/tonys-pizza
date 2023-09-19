@@ -46,4 +46,12 @@
         </div>
     </div>
 
+    <form action="/pizzas/new" method="post">
+        <input type="hidden" name="name" value="Marinara"/>
+        <input type="hidden" name="order_id" value=0>
+        <input type="hidden" name="options" value="Gluten free"/>
+        <input type="hidden" name="extra_toppings" value="[Mozzarella, Basilika]"/>
+        <button class="buy"type="submit">Köp glutenfri</button>
+    </form>
+
 </div>
