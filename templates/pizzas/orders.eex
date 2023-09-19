@@ -1,15 +1,3 @@
-<!-- <ul>
-  <%= for pizza <- pizzas do %>
-    <li>
-      <p>
-        Order: <%=pizza.id%>,
-          Name: <%=pizza.name%>, Options: <%=pizza.options%>, Extra toppings:<%=pizza.extra_toppings%>, Done:
-                <%=pizza.done%>
-      </p>
-    </li>
-    <% end %>
-</ul> -->
-
 <div id = "pizzas_container">
   <h1 id = "pizzas_h1">Orders</h1>
   <table id = "pizzas_table">
@@ -17,18 +5,16 @@
       <th>Order ID</th>
       <th>Pizza Name</th>
       <th>Options</th>
-      <th>Extra toppings</th>
       <th>Done?</th>
     </tr>
-    <%=for pizza <- pizzas do %>
+    <%=for order <- orders do %>
       <tr>
-        <td> <%= pizza.order_id%> </td>
-        <td> <%= pizza.name%> </td>
-        <td> <%= pizza.options |> String.replace(" ", ", ") |> String.replace("_", " ")%> </td>
-        <td> <%= pizza.extra_toppings%> </td>
+        <td> <%= order.order_id%> </td>
+        <td> <%= order.name%> </td>
+        <td> <%= order.option%> </td>
         <td> 
-          <form action="/pizzas/toggle_done/<%=pizza.id%>" method="POST">
-            <%= if pizza.done == 1 do %>
+          <form action="/orders/toggle_pizza_done/<%=order.pizza_id%>/<%=order.order_id%>" method="POST">
+            <%= if order.done == 1 do %>
               <input class = "pizza_submits" id = "pizza_check" type="submit"> 
             <% else %>
               <input class = "pizza_submits" id = "pizza_cross" type="submit"> 
@@ -36,7 +22,7 @@
           </form>
         </td>
         <td> 
-          <form action="/pizzas/delete/<%=pizza.id%>" method="POST">
+          <form action="/orders/delete_pizza/<%=order.pizza_id%>/<%=order.order_id%>" method="POST">
             <input class = "pizza_submits" id = "pizza_trashcan" type="submit">
           </form>
         </td>
@@ -50,4 +36,3 @@
   <% end %>
 
 </div>
-
