@@ -1,9 +1,10 @@
-const input = document.querySelector("input")
-    h2 = document.querySelector("h2");
+ const button = document.querySelector("#button")
+ const canvas = document.querySelector("#confetti")
 
-input.addEventListener("keyup", display);
+ const jsConfetti = new JSConfetti();
 
-function diplay() {
-    localStorage.setItem("value", input.value);
-    h2.innerHTML = localStorage.getItem("value")
-}
+ button.addEventListener("click", () => {
+    jsConfetti.addConfetti({
+        emojis: ['🍕', '🗿', '💀', '🫃', '🇮🇹', '😋'],
+    })
+})
